@@ -95,17 +95,19 @@ function wishGoodDay() {
 
 wishGoodDay();
 
+var usersPull = [];
+var errorsCount = 0;
 
+function makeFormActive(message) {
+  var formErrors =  document.getElementById('formErrors');
+  document.getElementById(message).style.display = 'block';
+  formErrors.focus();  
+}
 
-//document.querySelector("#form").addEventListener("submit", function(e){
 function saveNewUser() {
-
-  var usersPull = [];
-  var errorsCount = 0;
-
-  
+ 
   //text under input fields
-  var userNameHelp = document.getElementById('userNameHelp');
+  var userNameHelp = document.getElementById('userNameHelp') ;
   var birthYearHelp = document.getElementById('birthYearHelp');
   var phoneHelp = document.getElementById('phoneHelp');
   var formErrors = document.getElementById('formErrors');
@@ -124,15 +126,17 @@ function saveNewUser() {
   var zipcode = document.getElementById('zipcode').value;
   var email = document.getElementById('email').value;
 
+
+
   //List of errors block
   var formErrors =  document.getElementById('formErrors');
-  var userNameMessage = document.getElementById('username');
-  var firstNameMessage = document.getElementById('firstName');
-  var lastNameMessage = document.getElementById('lastname');
-  var birthYearMessage = document.getElementById('birthYear');
-  var phoneMessage = document.getElementById('phone');
-  var zipcodeMessage = document.getElementById('zipcode');
-  var emailMessage = document.getElementById('email');
+  //var userNameMessage = document.getElementById('userNameMessage');
+  var firstNameMessage = document.getElementById('firstNameMessage');
+  var lastNameMessage = document.getElementById('lastNameMessage');
+  var birthYearMessage = document.getElementById('birthYearMessage');
+  var phoneMessage = document.getElementById('phoneMessage');
+  var zipcodeMessage = document.getElementById('zipcodeMessage');
+  var emailMessage = document.getElementById('emailMessage');
   
   var user = {
     userName,
@@ -144,18 +148,22 @@ function saveNewUser() {
     email
   } 
         // checking userName
+    
+
         if (usersPull.length >= 1) {
+          debugger;
           usersPull.forEach(function(elem) {
             if (elem.userName == userName){
               userNameHelp.style.display = 'block';
-              userNameHelp.classList.add("is-danger");
-              userNameHelp.innerHTML='This username already exists';
               userNameField.classList.add("is-danger");
-debugger;
-              formErrors.style.display = 'block';
-              userNameMessage.style.display = 'block';
-              errorsCount++;
 
+              makeFormActive("usernameMessage");
+
+              // formErrors.style.display = 'block';
+              // document.getElementById('usernameMessage').style.display = 'block';    
+              // formErrors.focus();  
+
+              errorsCount++;
               delete user.userName;
             }
             else {
@@ -168,7 +176,6 @@ debugger;
               userNameField.classList.add("is-success");
               user.userName = userName;
             }
-
           })
         }
 
@@ -179,56 +186,34 @@ debugger;
               birthYearField.setAttribute('aria-disabled', false);
               birthYearField.disabled = false;
               birthYearHelp.style.display = 'block';
-              userNameHelp.innerHTML='This username already exists';
-              birthYearField.focus();//does not work
+              makeFormActive("birthYearMessage"); 
             }
           })
         };
 
         // validate number 
-        if (phone.length >=1) {
-          debugger;
+        if (phone.length >=10) {
           phoneHelp.style.display = 'block';
-          phoneHelp.focus();//does not work
-
-          //to do - add styles red, green
-          formErrors.style.display = 'block';
-          document.getElementById('phoneMessage').style.display = 'block';         
-
-           //for Block with errors
+          makeFormActive("phoneMessage");        
         }
 
         // validate email 
         document.getElementById('email').addEventListener('invalid', (event) =>{
           console.log('invalid');
           event.preventDefault();
-          alert('first');
         });
-
-
-
-  var counter = 0;
-     for (var key in user) {
-       counter++;
-     }
-
-  if (counter==7) {
-    usersPull.push(user);
-  }       
 
   console.log('user', user);
   console.log('usersPull', usersPull);
+  usersPull.push(user);
+
+
 
  // document.querySelector("#form").reset();
 
-  var formStart = document.getElementById('username');
-    formStart.focus();
+  //var formStart = document.getElementById('username');
+   // formStart.focus();
 
   return false;
-
-  // if(!isValid){
-  //     alert('not valid form');_
-  //     e.preventDefault();    //stop form from submitting
-  // 
 };
 

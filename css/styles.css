@@ -317,6 +317,11 @@ input:focus, button:focus, a:focus, select:focus, textarea:focus {
 #birthYearHelp,
 #phoneHelp,
 #emailHelp,
+#firstNameHelp,
+#addressHelp,
+#lastNameHelp,
+#successHelp,
+#zipcodeHelp,
 #formErrors {
   display: none;
 }

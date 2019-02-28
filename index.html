@@ -487,13 +487,7 @@
     </div>
 
 
-    </div>
-
-    
-
-
-                 
-        
+    </div>  
 
     <div class="tab-pane" id="pane-3" role="tabpanel" tabindex="0" aria-labelledby="3">
       <div class="columns medias">
@@ -1128,24 +1122,23 @@
 
       
 
-      <form class="column is-half is-offset-one-quarter box" aria-labelledby="contact_us" id="form">
+      <form class="column is-half is-offset-one-quarter box" aria-labelledby="contact_us" id="form" novalidate>
           <div id="formErrors" tabindex="0">
             <h3 >Error! The form could not be submitted due to invalid entries.</h3>
             <p>Please fix the following fields:</p>
             <ol style="margin-top:20px">
               <li id="usernameMessage"><a href="#username">This username already exists. Please use another one</a></li>
-              <li id="lastnameMessage"><a href="#lastname">Age - please enter a valid age (for example, 35)</a></li>
               <li id="birthYearMessage"><a href="#birthYear">New field with birth year is added. Please fill it</a></li>
-              <li id="phoneMessage"><a href="#phone">Maximum phone number length is 25 symbols.</a></li>
-              <li id="zipcodeMessage"><a href="#zipcode">Age - please enter a valid age (for example, 35)</a></li>
-              <li id="emailMessage"><a href="#email">Age - please enter a valid age (for example, 35)</a></li>
+              <li id="phoneMessage"><a href="#phone">Maximum phone number length is 10 symbols.</a></li>
+              <li id="zipCodeMessage"><a href="#zipcode">Please enter your zipcode</a></li>
+              <li id="emailMessage"><a href="#email">Please enter correct email</a></li>
             </ol>
           </div>
 
           <div class="field">
               <label for="username" class="label">Username</label>
               <div class="control has-icons-left has-icons-right">
-                <input id="username" name="User name" aria-describedby="userNameHelp" class="input" type="text" required aria-required="true" aria-invalid="false" placeholder="Username">
+                <input id="username" name="User name" onblur="valitateUserName(this.value)" aria-describedby="userNameHelp" class="input" type="text" required aria-required="true" aria-invalid="false" placeholder="Username">
                 <span class="icon is-small is-left" aria-hidden="true"> 
                   <span class="fas fa-user"></span>
                 </span>
@@ -1154,27 +1147,29 @@
                 </span>
               </div>
               <div></div>
-              <p class="help is-danger" id="userNameHelp" aria-live="assertive">This username already exists</p>
+              <p class="help is-danger" id="userNameHelp" aria-live="assertive">Please add your username</p>
             </div>
 
         <div class="field">
           <label for="firstname" class="label">First name</label>
           <div class="control">
-            <input id="firstname" class="input" name="First name" type="text" required aria-required="true" aria-invalid="false" placeholder="First name">
+            <input id="firstname" class="input" name="First name" onblur="valitateFirstName(this.value)" type="text" required aria-required="true" aria-invalid="false" placeholder="First name">
           </div>
+          <p class="help is-danger" id="firstNameHelp" aria-live="assertive">Please add your firstname</p>
         </div>
 
         <div class="field">
           <label for="lastname" class="label">Last name</label>
           <div class="control">
-            <input id="lastname" class="input" name="Last name" type="text" required aria-required="true" aria-invalid="false" placeholder="Last name">
+            <input id="lastname" class="input" name="Last name" type="text" onblur="valitateLastName(this.value)" required aria-required="true" aria-invalid="false" placeholder="Last name">
           </div>
+          <p class="help is-danger" id="lastNameHelp" aria-live="assertive">Please add your lastname</p>
         </div> 
         
         <div class="field">
             <label for="birthYear" class="label">Birth year</label>
             <div class="control">
-              <input id="birthYear" aria-describedby="birthYearHelp" disabled aria-disabled="true" class="input" name="year" type="number" required aria-required="true" aria-invalid="false" placeholder="Birth year">
+              <input id="birthYear" onblur="valitateBirthYear(this.value)" aria-describedby="birthYearHelp" disabled aria-disabled="true" class="input" name="year" type="number" required aria-required="true" aria-invalid="false" placeholder="Birth year">
             </div>
             <p class="help is-danger" id="birthYearHelp" aria-live="assertive">Please enter your birth year</p>
           </div>
@@ -1182,31 +1177,33 @@
         <div class="field">
           <label for="phone" class="label">Phone</label>
           <div class="control">
-            <input id="phone" aria-describedby="phoneHelp" novalidate class="input" name="phone" type="number" required aria-required="true" aria-invalid="false" placeholder="Phone">
+            <input id="phone" onblur="valitatePhone(this.value)" aria-describedby="phoneHelp" class="input" name="phone" type="number" required aria-required="true" aria-invalid="false" placeholder="Phone">
           </div>
-          <p class="help is-danger" id="phoneHelp">Maximum phone number length is 10 symbols.</p>
+          <!-- <p class="help is-danger" id="phoneHelp">Maximum phone number length is 10 symbols.</p> -->
+          <p class="help is-danger" id="phoneHelp" aria-live="assertive">Please enter your phone number</p>
         </div>
 
         <div class="field">
           <label for="address" class="label">Address</label>
           <div class="control">
-            <input id="address" class="input" name="address" type="text" required aria-required="true" aria-invalid="false" placeholder="Address">
+            <input id="address" onblur="validateAddress(this.value)" class="input" name="address" type="text" required aria-required="true" aria-invalid="false" placeholder="Address">
           </div>
+          <p class="help is-danger" id="addressHelp" aria-live="assertive">Please enter your address</p>
         </div>
 
         <div class="field">
             <label for="zipcode" class="label">Zip code</label>
             <div class="control">
-              <input id="zipcode" class="input" name="zipcode" type="text" required aria-required="true" aria-invalid="false" placeholder="Zip code">
+              <input id="zipcode" onblur="validateZipcode(this.value)" class="input" name="zipcode" type="text" required aria-required="true" aria-invalid="false" placeholder="Zip code">
             </div>
+            <p class="help is-danger" id="zipcodeHelp" aria-live="assertive">Please enter your zipcode</p>
+
           </div>
 
         <div class="field">
           <label for="email" class="label">Email</label>
           <div class="control has-icons-left has-icons-right">
-            <input id="email" name="email" class="input" type="email"
-            
-            placeholder="Email input" required aria-required="true" aria-invalid="">
+            <input id="email" name="email" class="input" onblur="validateEmail(this.value)" type="email" placeholder="Email input" required aria-required="true" aria-invalid="">
             <span class="icon is-small is-left" aria-hidden="true">
               <span class="fas fa-envelope"></span>
             </span>
@@ -1214,7 +1211,7 @@
               <span class="fas fa-exclamation-triangle"></span>
             </span>
           </div>
-          <p class="help" id="emailHelp">This email is invalid</p>
+          <p class="help is-danger" id="emailHelp" aria-live="assertive">Please enter your email</p>
         </div>
 
         <div class="field is-grouped">
